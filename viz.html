@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NewsFilterer — Data Visualization</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body{ padding-top:70px; background:#fff; color:#222; }
+    .chart-card{ min-height:320px; }
+    .container{ max-width:1100px; }
+    footer{padding:18px 0; text-align:center; color:#666;}
+  </style>
+</head>
+<body>
+  <!-- NAV (copy/paste of navbar) -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><strong>NewsFilterer</strong></a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="viz.html">Visualizations</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <h2>Data Visualizations</h2>
+    <p class="text-muted">Interactive charts below use meaningful dummy data tied to the news filterer & bias checker domain. In the final project these charts will be fed by live API data.</p>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card chart-card p-3 shadow-sm">
+          <h5>Articles by Source (Bar)</h5>
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card chart-card p-3 shadow-sm">
+          <h5>Sentiment Distribution (Pie)</h5>
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card p-3 shadow-sm">
+          <h5>Bias Score Over Time (Line)</h5>
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+
+      <div class="col-12 text-end">
+        <a class="btn btn-outline-secondary" href="index.html">← Back</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <small>Charts built with Chart.js • Dummy data simulates source counts, sentiment (%) and bias score trends.</small>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    // --- Dummy data tailored to NewsFilterer domain ---
+    // Bar: Article counts by source (useful to see concentration)
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Source A','Source B','Source C','Source D','Independent'],
+        datasets: [{
+          label: 'Number of Articles',
+          data: [120, 80, 45, 30, 20],
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive:true,
+        plugins: { legend:{display:false}, tooltip:{mode:'index'} },
+        scales: {
+          y: { beginAtZero:true, title:{display:true, text:'Articles'} }
+        }
+      }
+    });
+
+    // Pie: Sentiment distribution of analyzed articles
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Positive','Neutral','Negative'],
+        datasets: [{ data: [35, 40, 25], /*%*/ }]
+      },
+      options: { responsive:true, plugins:{legend:{position:'bottom'}}}
+    });
+
+    // Line: Bias score (0 neutral, + positive bias, - negative bias) across weeks
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['Week 1','Week 2','Week 3','Week 4','Week 5','Week 6'],
+        datasets: [{
+          label:'Average Bias Score (source-normalized)',
+          data: [0.1, 0.25, -0.05, 0.2, 0.15, 0.05],
+          fill:true,
+          tension:0.4,
+          pointRadius:4
+        }]
+      },
+      options: {
+        responsive:true,
+        scales: {
+          y: { suggestedMin:-0.5, suggestedMax:0.5, title:{display:true, text:'Bias Score'} }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
