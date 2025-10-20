@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NewsFilterer — About Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body{ padding-top:70px; background:#fff; color:#222; }
+    .member { min-height:140px; }
+    .diagram { background:#f7f9fc; border-radius:8px; padding:18px; }
+    .pk { font-weight:700; color:#0d6efd; }
+    .fk { font-style:italic; color:#6c757d; }
+    footer{padding:18px 0; text-align:center; color:#666;}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><strong>NewsFilterer</strong></a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="viz.html">Visualizations</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <h2>About Us</h2>
+    <p class="text-muted">Prototype for the final project.</p>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="card p-3 member">
+          <h5>Mohammad Abdul Mannan</h5>
+          <p class="mb-1"><strong>Role:</strong> Project planning</p>
+          <p><strong>Contributions:</strong> Designed the main project idead. Also Built static pages and Botpress integration.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3 member">
+          <h5>Maaz Masood</h5>
+          <p class="mb-1"><strong>Role:</strong> Data visualization</p>
+          <p><strong>Contributions:</strong> Designed and added Chart.js visualizations along with a responsive layout</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3 member">
+          <h5>Kamran Khalid</h5>
+          <p class="mb-1"><strong>Role:</strong> API design</p>
+          <p><strong>Contributions:</strong> Designed APIs, laid out skeleton backend structure layout for CRUD operations</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3 member">
+          <h5>Saketh Polavarapu</h5>
+          <p class="mb-1"><strong>Role:</strong> Data modelling & API design</p>
+          <p><strong>Contributions:</strong> Logical data modela and dataset selection, and final project planning.</p>
+        </div>
+      </div>
+    </div>
+
+    <h4>Logical Data Model</h4>
+    <p class="text-muted">Below is a simple logical model showing two one-to-many relationships: <strong>Sources → Articles</strong> and <strong>Users → Flags/Reports</strong>. Primary keys (PK) and foreign keys (FK) are labeled.</p>
+
+    <div class="diagram mb-3">
+      <!-- Inline SVG diagram (acts as the "image" requirement) -->
+      <svg width="100%" height="300" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" aria-label="Logical data model">
+        <!-- Sources -->
+        <rect x="30" y="30" width="240" height="120" rx="8" fill="#ffffff" stroke="#ccc"/>
+        <text x="150" y="55" font-size="16" text-anchor="middle" font-weight="700">Sources</text>
+        <text x="45" y="85" font-size="13"><tspan class="pk">PK source_id</tspan></text>
+        <text x="45" y="105" font-size="13">name</text>
+        <text x="45" y="125" font-size="13">url</text>
+
+        <!-- Articles -->
+        <rect x="360" y="10" width="300" height="180" rx="8" fill="#ffffff" stroke="#ccc" />
+        <text x="510" y="35" font-size="16" text-anchor="middle" font-weight="700">Articles</text>
+        <text x="375" y="75" font-size="13"><tspan class="pk">PK article_id</tspan></text>
+        <text x="375" y="95" font-size="13"><tspan class="fk">FK source_id</tspan></text>
+        <text x="375" y="115" font-size="13">title</text>
+        <text x="375" y="135" font-size="13">published_date</text>
+        <text x="375" y="155" font-size="13">bias_score</text>
+
+        <!-- Users -->
+        <rect x="700" y="30" width="240" height="120" rx="8" fill="#ffffff" stroke="#ccc"/>
+        <text x="820" y="55" font-size="16" text-anchor="middle" font-weight="700">Users</text>
+        <text x="715" y="90" font-size="13"><tspan class="pk">PK user_id</tspan></text>
+        <text x="715" y="110" font-size="13">name</text>
+        <text x="715" y="130" font-size="13">role</text>
+
+        <!-- Flags/Reports (child of users and articles) -->
+        <rect x="360" y="200" width="300" height="80" rx="8" fill="#ffffff" stroke="#ccc" />
+        <text x="510" y="225" font-size="14" text-anchor="middle" font-weight="700">Flags</text>
+        <text x="375" y="250" font-size="13"><tspan class="pk">PK flag_id</tspan></text>
+        <text x="375" y="270" font-size="13"><tspan class="fk">FK article_id</tspan>, <tspan class="fk">FK user_id</tspan></text>
+
+        <!-- Relationship arrows -->
+        <line x1="270" y1="90" x2="360" y2="90" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="220" y="80" font-size="12" fill="#0d6efd">1..* (Source → Articles)</text>
+
+        <line x1="660" y1="140" x2="700" y2="140" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="680" y="130" font-size="12" fill="#0d6efd" text-anchor="end">1..* (User → Flags)</text>
+
+        <line x1="510" y1="190" x2="510" y2="200" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="540" y="190" font-size="12" fill="#0d6efd">1..* (Article → Flags)</text>
+
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#0d6efd" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <p><strong>How it fits:</strong> In the final app, articles will be fetched from APIs and stored in an Articles table (article_id as PK). Each article belongs to one Source (source_id FK) — this is the first one-to-many. Users can flag articles; each flag references one user and one article (two FKs) — second one-to-many relationships. These relationships let us display source-specific analytics and user reports in the UI.</p>
+
+    <p><strong>GitHub:</strong> <a href="https://github.com/M-Abdul-Mannan-USF/AppDevProject" target="_blank">https://github.com/M-Abdul-Mannan-USF/AppDevProject</a></p>
+
+    <a class="btn btn-outline-secondary" href="index.html">← Back</a>
+  </main>
+
+  <footer>
+    <small>Include the actual Git log output in your final PDF submission (example `git log --oneline --graph`).</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
