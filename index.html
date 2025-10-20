@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NewsFilterer — Home</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    :root{
+      --brand:#0d6efd;
+      --muted:#6c757d;
+    }
+    body { padding-top:70px; background:#f8f9fa; color:#222;}
+    .hero {background:linear-gradient(90deg, rgba(13,110,253,0.08), rgba(13,110,253,0.02)); padding:40px; border-radius:10px;}
+    .bot-iframe {width:100%; height:520px; border:none; border-radius:8px;}
+    nav .nav-link.active { font-weight:600; color:var(--brand) !important; }
+    .crud-card { min-height:160px; }
+    footer { padding:20px 0; text-align:center; color:var(--muted); }
+    @media (max-width:576px){ .bot-iframe{height:360px;} }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><strong>NewsFilterer</strong> — Bias Checker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navmenu" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="viz.html">Data Visualization</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">CRUD</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="create.html">Create</a></li>
+              <li><a class="dropdown-item" href="read.html">Read</a></li>
+              <li><a class="dropdown-item" href="update.html">Update</a></li>
+              <li><a class="dropdown-item" href="delete.html">Delete</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE -->
+  <main class="container">
+    <div class="row g-4">
+      <div class="col-12">
+        <section class="hero">
+          <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+            <div>
+              <h1>NewsFilterer — Bias Checker</h1>
+              <p class="lead">Prototype UI for filtering news, detecting bias and visualizing source/sentiment distributions. This static prototype demonstrates navigation, CRUD flows, and interactive charts (Chart.js). Dynamic features (API, DB) will be added in the final project.</p>
+              <p><strong>Key features:</strong> source filtering, sentiment & bias summary, interactive charts, and a Botpress assistant integrated for quick dataset queries.</p>
+              <p><a href="viz.html" class="btn btn-primary me-2">View Visualizations</a><a href="about.html" class="btn btn-outline-secondary">About / Team</a></p>
+            </div>
+            <div style="min-width:260px; max-width:420px;">
+              <!-- Botpress embed (replace URL) -->
+              <div class="card shadow-sm">
+                <div class="card-body p-2">
+                  <small class="text-muted">Chatbot (ask dataset questions)</small>
+                  <iframe class="bot-iframe" src="https://cdn.botpress.cloud/webchat/v3.3/shareable.html?configUrl=https://files.bpcontent.cloud/2025/10/19/19/20251019193716-DL1IOAPI.json" title="Botpress Chat"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- CRUD quick nav cards -->
+      <div class="col-12">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="card crud-card p-3 text-center">
+              <h5>Create</h5>
+              <p class="text-muted">Simulate adding a new article/source</p>
+              <a href="create.html" class="btn btn-outline-primary btn-sm">Go →</a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card crud-card p-3 text-center">
+              <h5>Read</h5>
+              <p class="text-muted">View data (dummy table)</p>
+              <a href="read.html" class="btn btn-outline-primary btn-sm">Go →</a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card crud-card p-3 text-center">
+              <h5>Update</h5>
+              <p class="text-muted">Simulate editing records</p>
+              <a href="update.html" class="btn btn-outline-primary btn-sm">Go →</a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card crud-card p-3 text-center">
+              <h5>Delete</h5>
+              <p class="text-muted">Explain record removal</p>
+              <a href="delete.html" class="btn btn-outline-danger btn-sm">Go →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="col-12">
+        <footer>
+          <small>Dataset: Kaggle — <a href="https://www.kaggle.com/datasets/prasad22/healthcare-dataset" target="_blank">Healthcare Dataset (used as example data)</a> — adapt to news dataset for final project. • <a href="https://github.com/YOUR_REPO" target="_blank">GitHub Repo</a></small>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
