@@ -1,0 +1,71 @@
+﻿@model NewsBiasChecker.Models.Roundup
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Roundup</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Title</dt>
+        <dd class="col-sm-10">@Model.Title</dd>
+
+        <dt class="col-sm-2">Topics</dt>
+        <dd class="col-sm-10">@Model.Topics</dd>
+
+        <dt class="col-sm-2">Date</dt>
+        <dd class="col-sm-10">@Model.Date.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-2">StoryUrl</dt>
+        <dd class="col-sm-10">@Model.StoryUrl</dd>
+
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10">@Model.Description</dd>
+    </dl>
+</div>
+
+<hr />
+<h3>Stories</h3>
+
+
+
+@if (Model.Stories == null || !Model.Stories.Any())
+{
+    <p><em>No stories yet.</em></p>
+}
+else
+{
+    @foreach (var s in Model.Stories.OrderBy(x => x.Side))
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>@s.Side</strong>
+                @if (!string.IsNullOrWhiteSpace(s.Outlet))
+                {
+                    <span class="text-muted"> — @s.Outlet</span>
+                }
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrWhiteSpace(s.Title))
+                {
+                    <p><strong>@s.Title</strong></p>
+                }
+                @if (!string.IsNullOrWhiteSpace(s.Url))
+                {
+                    <p><a href="@s.Url" target="_blank">@s.Url</a></p>
+                }
+                @if (!string.IsNullOrWhiteSpace(s.Text))
+                {
+                    <p>@s.Text</p>
+                }
+            </div>
+        </div>
+    }
+}
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

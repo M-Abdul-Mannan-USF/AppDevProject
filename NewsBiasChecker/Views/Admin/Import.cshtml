@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Import JSON";
+}
+<h1>Import JSON</h1>
+
+@if (TempData["Msg"] != null)
+{
+    <div class="alert alert-info">@TempData["Msg"]</div>
+}
+
+<form asp-action="Import" method="post">
+    <div class="mb-3">
+        <label class="form-label">File name (in wwwroot/data)</label>
+        <input name="fileName" class="form-control" value="huffpost.json" />
+    </div>
+    <button class="btn btn-primary" type="submit">Import</button>
+</form>

@@ -1,0 +1,75 @@
+﻿@model NewsBiasChecker.Models.ViewModels.RoundupEditViewModel
+@{
+    ViewData["Title"] = "Edit Roundup";
+}
+
+<h1>Edit Roundup</h1>
+<hr />
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <!-- Parent fields (same as Create) -->
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Date" class="form-label"></label>
+            <input asp-for="Date" type="date" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Topics" class="form-label"></label>
+            <input asp-for="Topics" class="form-control" />
+        </div>
+        <div class="col-12">
+            <label asp-for="StoryUrl" class="form-label"></label>
+            <input asp-for="StoryUrl" class="form-control" />
+        </div>
+        <div class="col-12">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+
+    <hr />
+    <h4>Stories</h4>
+
+    @for (int i = 0; i < Model.Stories.Count; i++)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>@Model.Stories[i].Side</strong>
+            </div>
+            <div class="card-body row g-3">
+                <input type="hidden" asp-for="Stories[i].Id" />
+                <input type="hidden" asp-for="Stories[i].Side" />
+                <div class="col-md-6">
+                    <label class="form-label">Title</label>
+                    <input asp-for="Stories[i].Title" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Url</label>
+                    <input asp-for="Stories[i].Url" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Summary</label>
+                    <textarea asp-for="Stories[i].Text" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Outlet (auto if blank)</label>
+                    <input asp-for="Stories[i].Outlet" class="form-control" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
